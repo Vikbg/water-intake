@@ -1,66 +1,85 @@
-# Hydra Learning Project
+# Water Intake Tracker
 
-A learning repository for exploring and mastering [Hydra](https://hydra.cc/), a framework for configuring complex applications with Python.
+A simple command-line application to track your daily water intake and monitor progress toward your hydration goals.
 
-## About Hydra
+## Features
 
-Hydra is a framework that simplifies the development of applications by managing configurations. It allows you to:
+- **Track Water Intake**: Log water consumption in milliliters
+- **Daily Progress**: View your progress toward the daily goal with a visual progress bar
+- **Persistent Data**: Automatically saves your data to `data.json`
+- **Easy-to-use CLI**: Simple command-line interface with intuitive arguments
 
-- Define configurations hierarchically using YAML files
-- Override configuration parameters from the command line
-- Manage multiple configuration sets easily
-- Reduce boilerplate code in your applications
+## Prerequisites
+
+- Python 3.8 or higher
+
+## Installation
+
+1. Clone or navigate to this directory
+2. No external dependencies required (uses only Python standard library)
+
+## Usage
+
+### Adding Water Intake
+
+Log your water intake in milliliters:
+
+```bash
+python hydra.py --add 500
+```
+
+This adds 500 mL to today's water intake.
+
+### Viewing Daily Statistics
+
+Display your progress toward the daily goal:
+
+```bash
+python hydra.py --stats
+```
+
+Output example:
+```
+[█████░░░░░] 50% (1.25L / 2.5L)
+```
+
+### Combining Arguments
+
+You can combine both arguments:
+
+```bash
+python hydra.py --add 500 --stats
+```
+
+## Daily Goal
+
+The default daily water intake goal is **2.5 liters (2500 mL)**. To change this, modify the `WATER_GOAL_L` constant in [hydra.py](hydra.py).
+
+## Data Storage
+
+Water intake data is stored in [data.json](data.json) with the following structure:
+
+```json
+{
+    "YYYY-MM-DD": {
+        "water_l": 1.5,
+        "goal_l": 2.5,
+        "full": false
+    }
+}
+```
+
+Each day is tracked separately, resetting the counter at midnight.
 
 ## Project Structure
 
-```md
-Hydra/
-├── README.md
-├── configs/          # Configuration files
-├── src/              # Source code
-└── examples/         # Example scripts and notebooks
 ```
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.8 or higher
-- pip or conda
-
-### Installation
-
-1. Clone or navigate to this directory
-2. Install Hydra:
-
-```bash
-pip install hydra-core
+.
+├── hydra.py          # Main application script
+├── data.json         # Data storage (auto-created)
+├── README.md         # This file
+└── .gitignore        # Git configuration
 ```
-
-### Running Examples
-
-```bash
-python src/example.py
-```
-
-To override configuration parameters:
-
-```bash
-python src/example.py param=value
-```
-
-## Key Concepts
-
-- **Config Groups**: Organize configurations into logical groups
-- **Composition**: Combine multiple configuration files
-- **Command-line Overrides**: Change configuration values at runtime
-- **Structured Configs**: Type-safe configuration using dataclasses
-
-## Resources
-
-- [Official Hydra Documentation](https://hydra.cc/)
-- [Hydra GitHub Repository](https://github.com/facebookresearch/hydra)
-- [Hydra Tutorials](https://hydra.cc/docs/tutorials/basic/your_first_hydra_app/overview)
 
 ## License
 
