@@ -2,6 +2,7 @@ import argparse
 import json
 import datetime
 import os
+import matplotlib.pyplot as plt
 
 DATA_FILE = "data.json"
 WATER_GOAL_L = 2.5
@@ -20,6 +21,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Show progress toward the daily goal.",
     )
+    parser.add_argument(
+        "--plot",
+        action="store_true",
+        help="Show water intake history chart.",
+    )
     return parser
 
 
@@ -34,6 +40,22 @@ def save_json(path, data):
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=4)
 
+def plot(data):
+    if not data:
+        print("No data available to plot.")
+        return
+
+    dates = sorted(data.keys())
+    water_values = [data[day].get("water_l", 0.0) for day in dates]
+
+    fig, ax = plt.subplots()
+    ax.plot(dates, water_values, marker="o")
+    ax.set_title("Water Intake History")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Liters")
+    fig.autofmt_xdate()
+    plt.tight_layout()
+    plt.show()
 
 def main() -> None:
     parser = build_parser()
@@ -72,6 +94,10 @@ def main() -> None:
 
         print(f"[{bar}] {percent}% ({total_water_l:.2f}L / {WATER_GOAL_L}L)")
 
+    if args.plot:
+        plot(data)
+
+    
 
 if __name__ == "__main__":
     main()

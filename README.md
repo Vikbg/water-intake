@@ -39,7 +39,8 @@ python hydra.py --stats
 ```
 
 Output example:
-```
+
+```plain
 [█████░░░░░] 50% (1.25L / 2.5L)
 ```
 
@@ -73,7 +74,7 @@ Each day is tracked separately, resetting the counter at midnight.
 
 ## Project Structure
 
-```
+```plain
 .
 ├── hydra.py          # Main application script
 ├── data.json         # Data storage (auto-created)
