@@ -72,6 +72,14 @@ Water intake data is stored in [data.json](data.json) with the following structu
 
 Each day is tracked separately, resetting the counter at midnight.
 
+## Plot
+
+You can generate a plot of your progression by using:
+
+```bash
+python hydra.py --plot
+```
+
 ## Project Structure
 
 ```plain
